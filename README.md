@@ -26,3 +26,4 @@ Once you have the dependencies, create a `main.py` file and paste the provided c
 This will start a temporary Gradio server, allowing you to access the Dowry Calculator through your web browser. Have fun and enjoy the lighthearted dowry estimation! 🎉🤑
 
 Now go ahead, run the calculator, and have a good laugh at the delightful dowry figures it conjures! Remember, it's all in good fun! 😄🎈
+<img width="1533" alt="Screenshot 2023-08-30 at 7 48 46 PM" src="https://github.com/Delicate-Jerk/Dowry-Calculator/assets/75275801/52ddd764-a5f0-48d0-a138-82f7cfee53fb">
