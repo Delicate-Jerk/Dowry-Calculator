@@ -1,12 +1,7 @@
-import tkinter as tk
-from tkinter import messagebox
+import streamlit as st
 
-def calculate_worth():
-    income = int(income_entry.get())
-    profession = profession_var.get()
-    employment_status = employment_var.get()
-    location = location_var.get()
-
+def calculate_worth(income, profession, employment_status, location):
+    # Your worth calculation logic here
     profession_weights = {
         "engineer": 0.3,
         "doctor": 0.4,
@@ -22,12 +17,12 @@ def calculate_worth():
     location_weights = {
         "India": 0.2,
         "USA": 0.4,
-        "Australia": 0.3,
+        "Australia": 0.3
         # Add more locations and weights as needed
     }
 
-    profession_worth = profession_weights.get(profession, 0)
-    employment_worth = employment_weights.get(employment_status, 0)
+    profession_worth = profession_weights.get(profession.lower(), 0)
+    employment_worth = employment_weights.get(employment_status.lower(), 0)
     location_worth = location_weights.get(location, 0)
 
     total_worth = (
@@ -36,52 +31,24 @@ def calculate_worth():
         0.2 * location_worth
     )
 
-    if profession == "doctor":
+    if profession.lower() == "doctor":
         total_worth += 400000
-    elif profession == "engineer":
+    elif profession.lower() == "engineer":
         total_worth += 300000
-    elif profession == "unemployed":
+    elif profession.lower() == "unemployed":
         total_worth += 100000
 
     final_worth = total_worth + income * 10
-    messagebox.showinfo("Result", f"Your calculated worth in rupees: {final_worth}")
+    return f"Your calculated Dowry in rupees: {final_worth:.2f}"
 
-# Create GUI window
-root = tk.Tk()
-root.title("Worth Calculator")
+st.title("Dowry Calculator (by yours truly - A^2)")
+st.write("Naughty hora k BKL")
 
-# Labels and Entries
-income_label = tk.Label(root, text="Monthly Income (in rupees):")
-income_label.pack()
+income = st.number_input("Monthly Income (in rupees)")
+profession = st.selectbox("Profession", ["Engineer", "Doctor", "Businessman", "Unemployed"])
+employment_status = st.selectbox("Employment Status", ["Employed", "Unemployed"])
+location = st.selectbox("Location", ["India", "USA", "Australia"])
 
-income_entry = tk.Entry(root)
-income_entry.pack()
-
-profession_label = tk.Label(root, text="Profession:")
-profession_label.pack()
-
-profession_var = tk.StringVar()
-profession_var.set("engineer")  # Default value
-profession_option_menu = tk.OptionMenu(root, profession_var, "engineer", "doctor", "businessman", "unemployed")
-profession_option_menu.pack()
-
-employment_label = tk.Label(root, text="Employment Status:")
-employment_label.pack()
-
-employment_var = tk.StringVar()
-employment_var.set("employed")  # Default value
-employment_option_menu = tk.OptionMenu(root, employment_var, "employed", "unemployed")
-employment_option_menu.pack()
-
-location_label = tk.Label(root, text="Location:")
-location_label.pack()
-
-location_var = tk.StringVar()
-location_var.set("India")  # Default value
-location_option_menu = tk.OptionMenu(root, location_var, "India", "USA", "Australia")
-location_option_menu.pack()
-
-calculate_button = tk.Button(root, text="Calculate Worth", command=calculate_worth)
-calculate_button.pack()
-
-root.mainloop()
+if st.button("Calculate Dowry"):
+    result = calculate_worth(income, profession, employment_status, location)
+    st.write(result)
